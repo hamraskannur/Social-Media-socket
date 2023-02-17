@@ -1,6 +1,6 @@
 const io = require("socket.io")(8800, {
   cors: {
-    origin: "https://www.locomate.smartworlds.shop",
+    origin: "https://locomate.smartworlds.shop",
   },
 });
 let activeUser = [];
