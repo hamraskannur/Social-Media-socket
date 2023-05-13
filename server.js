@@ -1,19 +1,20 @@
 const io = require("socket.io")(8800, {
   cors: {
-    origin: "https://www.locomate.smartworlds.shop",
+    origin: "https://locomate.onrender.com",
   },
 });
 let activeUser = [];
 io.on("connection", (socket) => {
   socket.on("new-user-add", (newUserId) => { 
     if (!activeUser.some((user) => user.userId === newUserId)) {
-      activeUser.push({
+      activeUser.push({ 
         userId: newUserId,
         socketId: socket.id,
       });
     }    
     io.emit("get-user", activeUser);
   });
+
   socket.on("send-message", (data) => {
     const { receiverId } = data;
     const user = activeUser.find((user) => user.userId === receiverId);
